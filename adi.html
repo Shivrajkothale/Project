@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoMart - Buy Cycles, Bikes & Cars</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+      }
+      .product {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 15px;
+        display: inline-block;
+        width: 30%;
+        background: #fff;
+      }
+      .product img {
+        width: 100%;
+        height: 150px;
+      }
+      .filter-bar {
+        margin: 20px;
+      }
+      .button {
+        padding: 10px 15px;
+        margin: 5px;
+        cursor: pointer;
+        background: #008cba;
+        color: white;
+        border: none;
+      }
+      .button:hover {
+        background: #005f73;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to AutoMart</h1>
+    <div class="filter-bar">
+      <button class="button" onclick="sortProducts()">Sort by Price</button>
+      <button class="button" onclick="filterCategory('cycle')">
+        Show Cycles
+      </button>
+      <button class="button" onclick="filterCategory('bike')">
+        Show Bikes
+      </button>
+      <button class="button" onclick="filterCategory('car')">Show Cars</button>
+      <button class="button" onclick="resetFilter()">Reset Filter</button>
+    </div>
+    <div id="product-container" class="container">
+      <div class="product" data-category="cycle" data-price="5000">
+        <img src="cycle.jpg" alt="Cycle" />
+        <h3>Mountain Bike</h3>
+        <p>Price: $5000</p>
+      </div>
+      <div class="product" data-category="bike" data-price="15000">
+        <img src="bike.jpg" alt="Bike" />
+        <h3>Sports Bike</h3>
+        <p>Price: $15000</p>
+      </div>
+      <div class="product" data-category="car" data-price="25000">
+        <img src="car.jpg" alt="Car" />
+        <h3>Luxury Car</h3>
+        <p>Price: $25000</p>
+      </div>
+    </div>
+    <script>
+      function sortProducts() {
+        let container = document.getElementById("product-container");
+        let products = Array.from(container.getElementsByClassName("product"));
+        products.sort(
+          (a, b) => a.getAttribute("data-price") - b.getAttribute("data-price")
+        );
+        products.forEach((product) => container.appendChild(product));
+      }
+      function filterCategory(category) {
+        let products = document.getElementsByClassName("product");
+        for (let product of products) {
+          product.style.display =
+            product.getAttribute("data-category") === category
+              ? "block"
+              : "none";
+        }
+      }
+      function resetFilter() {
+        let products = document.getElementsByClassName("product");
+        for (let product of products) {
+          product.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
